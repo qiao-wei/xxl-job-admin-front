@@ -18,7 +18,7 @@ export default {
           "addressType": 0,
           "addressList": null,
           "updateTime": "2021-02-26T01:27:29.000+00:00",
-          "registryList": null
+          "registryList": ['http://127.0.0.1']
         },
         {
           "id": 2,

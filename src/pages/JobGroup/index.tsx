@@ -133,7 +133,7 @@ const JobGroupList: React.FC = () => {
             setShowRegistryList(true);
           }}
         >
-          <FormattedMessage id="pages.common.show" defaultMessage="查看" />( {record.registryList.length})
+          <FormattedMessage id="pages.common.show" defaultMessage="查看" />( {record.registryList && record.registryList.length || 0})
         </a>,
       ],
     },
@@ -351,7 +351,7 @@ const JobGroupList: React.FC = () => {
         <>
           <b><FormattedMessage id='pages.jobGroups.registry-list' /></b>
           <br />
-          {currentRow?.registryList.map((host) => <>{host} <br /></>)}
+          {currentRow?.registryList && currentRow?.registryList.map((host) => <>{host} <br /></>)}
         </>
       </Drawer>
     </PageContainer>

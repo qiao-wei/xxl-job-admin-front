@@ -121,6 +121,7 @@ export default {
   'pages.users.form.password.required': '密码必须填写',
   'pages.users.form.len.check': '长度在[4-64]',
 
+
   'pages.jobGroups.list': '执行器列表',
   'pages.jobGroups.title': '名称',
   'pages.jobGroups.address-type': '注册方式',
