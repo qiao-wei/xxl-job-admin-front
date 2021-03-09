@@ -1,7 +1,8 @@
 export default {
   'pages.admin.subPage.title': ' 这个页面只有 admin 权限才能查看',
 
-  'pages.layouts.userLayout.title': 'Xxl job 任务调度平台',
+  'pages.layouts.userLayout.title': '调度平台',
+  'pages.layouts.userLayout.sub-title': 'Xxl 任务调度平台',
   'pages.login.accountLogin.tab': '账户密码登录',
   'pages.login.accountLogin.errorMessage': '错误的用户名和密码',
   'pages.login.username.placeholder': '用户名: admin or user',
@@ -35,7 +36,6 @@ export default {
   'pages.welcome.date.report': '日期分布图',
   'pages.welcome.success-rate.report': '成功比例图',
 
-
   'pages.common.operation': '操作',
   'pages.common.new': '新建',
   'pages.common.edit': '编辑',
@@ -49,7 +49,6 @@ export default {
   'pages.common.del-success': '删除成功',
   'pages.common.del-fail': '删除失败,请重试',
   'pages.common.show': '查看',
-
 
   'pages.jobs.list': '任务列表',
   'pages.jobs.job-group': '执行器',
@@ -87,7 +86,6 @@ export default {
   'pages.jobs.form.job-group.required': '执行器必须选',
   'pages.jobs.form.cron.required': 'CRON不能为空',
 
-
   'pages.logs.list': '日志列表',
   'pages.logs.clear': '清理',
   'pages.logs.job-id': '任务ID',
@@ -113,6 +111,7 @@ export default {
 
   'pages.users.list': '用户列表',
   'pages.users.username': '帐号',
+  'pages.users.password': '密码',
   'pages.users.permission': '权限',
   'pages.users.role': '角色',
   'pages.users.role.admin': '管理员',
@@ -120,7 +119,6 @@ export default {
   'pages.users.form.username.required': '帐号必须填写',
   'pages.users.form.password.required': '密码必须填写',
   'pages.users.form.len.check': '长度在[4-64]',
-
 
   'pages.jobGroups.list': '执行器列表',
   'pages.jobGroups.title': '名称',
@@ -131,5 +129,5 @@ export default {
   'pages.jobGroups.address-list': '机器地址',
   'pages.jobGroups.form.appname.required': 'AppName必须填写',
   'pages.jobGroups.form.title.required': '名称必须填写',
-  'pages.jobGroups.form.len.check': '长度在[4-64]'
+  'pages.jobGroups.form.len.check': '长度在[4-64]',
 };

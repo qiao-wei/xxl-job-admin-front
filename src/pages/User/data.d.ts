@@ -3,7 +3,7 @@ export type User = {
   username?: string;
   role: number;
   avatar: string;
-  permission: string;
+  permission: number[];
 };
 
 export type QueryParam = {

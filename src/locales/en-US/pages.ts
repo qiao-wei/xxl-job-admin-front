@@ -1,7 +1,7 @@
 export default {
   'pages.admin.subPage.title': 'This page can only be viewed by Admin',
-  'pages.layouts.userLayout.title':
-    'Task Schedule System',
+  'pages.layouts.userLayout.title': 'Task Schedule System',
+  'pages.layouts.userLayout.sub-title': 'Task Schedule System ',
   'pages.login.accountLogin.tab': 'Account Login',
   'pages.login.accountLogin.errorMessage': 'Incorrect username/password',
   'pages.login.username.placeholder': 'Username: admin or user',
@@ -22,7 +22,6 @@ export default {
   'pages.login.submit': 'Submit',
   'pages.login.loginWith': 'Login with :',
   'pages.login.registerAccount': 'Register Account',
-
 
   'pages.welcome.success': 'Success',
   'pages.welcome.fail': 'Fail',
@@ -50,7 +49,6 @@ export default {
   'pages.common.del-fail': 'Delete fail,please try again',
   'pages.common.show': 'view',
 
-
   'pages.jobs.list': 'Job List',
   'pages.jobs.job-group': 'Executor',
   'pages.jobs.status': 'Status',
@@ -77,7 +75,8 @@ export default {
   'pages.jobs.executor-timeout': 'Timeout',
   'pages.jobs.executor-fail-retry-count': 'Retry Count',
   'pages.jobs.epp': 'Executor Host Address',
-  'pages.jobs.epp.ph': 'Please type the Executor host address for this time,Use the executor list if empty',
+  'pages.jobs.epp.ph':
+    'Please type the Executor host address for this time,Use the executor list if empty',
   'pages.jobs.ope.log': 'View Log',
   'pages.jobs.ope.next': 'Next Trigger Time',
   'pages.jobs.ope.copy': 'Copy',
@@ -86,7 +85,6 @@ export default {
   'pages.jobs.form.author.required': 'Author not empty',
   'pages.jobs.form.job-group.required': 'Executor must be selected',
   'pages.jobs.form.cron.required': 'Cron not empty',
-
 
   'pages.logs.list': 'Log List',
   'pages.logs.clear': 'Clear',
@@ -113,6 +111,7 @@ export default {
 
   'pages.users.list': 'list',
   'pages.users.username': 'Account',
+  'pages.users.password': 'Password',
   'pages.users.permission': 'Permission',
   'pages.users.role': 'Role',
   'pages.users.role.admin': 'Admin',
@@ -135,5 +134,5 @@ export default {
   'pages.jobGroups.address-list': 'Host List',
   'pages.jobGroups.form.appname.required': 'AppName required',
   'pages.jobGroups.form.title.required': 'Title required',
-  'pages.jobGroups.form.len.check': 'len [4-64]'
+  'pages.jobGroups.form.len.check': 'len [4-64]',
 };

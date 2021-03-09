@@ -4,36 +4,42 @@ import { Button, message, FormInstance } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import { ModalForm, ProFormText, ProFormRadio, } from '@ant-design/pro-form';
+import { ModalForm, ProFormText, ProFormRadio, ProFormSelect } from '@ant-design/pro-form';
 import ProTable from '@ant-design/pro-table';
 import type { QueryParam, User } from './data.d';
 import { queryUsers, saveUser, deleteUser } from './service';
 
-const UserList: React.FC = () => {
+import { queryMyJobGroups } from '../JobGroup/service';
+import { JobGroup } from '../JobGroup/data';
 
+const UserList: React.FC = () => {
   /** 国际化配置 */
   const intl = useIntl();
 
   /**
-   * 删除用户 
+   * 删除用户
    * @param fields 用户
    */
   const handleDelete = async (user: User) => {
     if (user.id) {
       await deleteUser(user.id);
-      message.success(intl.formatMessage({
-        id: 'pages.common.del-success',
-        defaultMessage: "删除成功"
-      }));
+      message.success(
+        intl.formatMessage({
+          id: 'pages.common.del-success',
+          defaultMessage: '删除成功',
+        }),
+      );
     } else {
-      message.error(intl.formatMessage({
-        id: 'pages.common.del-fail',
-        defaultMessage: "删除失败"
-      }));
+      message.error(
+        intl.formatMessage({
+          id: 'pages.common.del-fail',
+          defaultMessage: '删除失败',
+        }),
+      );
     }
 
     return true;
-  }
+  };
 
   /**
    * 新增或编辑用户
@@ -41,21 +47,24 @@ const UserList: React.FC = () => {
    * @param fields
    */
   const handleFormSubmit = async (fields: User) => {
-
     /** 国际化配置 */
-    const hide = message.loading(intl.formatMessage({
-      id: 'pages.common.dealing',
-      defaultMessage: '处理中...'
-    }));
+    const hide = message.loading(
+      intl.formatMessage({
+        id: 'pages.common.dealing',
+        defaultMessage: '处理中...',
+      }),
+    );
 
     try {
       const { code, msg } = await saveUser(fields);
       hide();
       if (code === 200) {
-        message.success(intl.formatMessage({
-          id: 'pages.common.save-success',
-          defaultMessage: "保存成功"
-        }));
+        message.success(
+          intl.formatMessage({
+            id: 'pages.common.save-success',
+            defaultMessage: '保存成功',
+          }),
+        );
         return true;
       } else {
         message.error(msg);
@@ -63,10 +72,12 @@ const UserList: React.FC = () => {
       }
     } catch (error) {
       hide();
-      message.error(intl.formatMessage({
-        id: 'pages.common.save-fail',
-        defaultMessage: "保存失败,请重试"
-      }));
+      message.error(
+        intl.formatMessage({
+          id: 'pages.common.save-fail',
+          defaultMessage: '保存失败,请重试',
+        }),
+      );
       return false;
     }
   };
@@ -74,6 +85,8 @@ const UserList: React.FC = () => {
   /** 新建以及编辑窗口的弹窗 */
   const [formModalVisible, handleFormModalVisible] = useState<boolean>(false);
   const [currentRow, setCurrentRow] = useState<User>();
+
+  const [perEditVisible, setPerEditVisible] = useState<boolean>(true);
 
   /** 确认删除窗口 */
   const [delConfirmModalVisible, handleDelConfirmModalVisible] = useState<boolean>(false);
@@ -83,12 +96,7 @@ const UserList: React.FC = () => {
 
   const columns: ProColumns<User>[] = [
     {
-      title: (
-        <FormattedMessage
-          id="pages.users.username"
-          defaultMessage="帐户"
-        />
-      ),
+      title: <FormattedMessage id="pages.users.username" defaultMessage="帐户" />,
       dataIndex: 'username',
       render: (dom, entity) => {
         return (
@@ -109,15 +117,11 @@ const UserList: React.FC = () => {
       // hideInSearch: true,
       valueEnum: {
         0: {
-          text: (
-            <FormattedMessage id="pages.users.role.normal" defaultMessage="普通用户" />
-          ),
+          text: <FormattedMessage id="pages.users.role.normal" defaultMessage="普通用户" />,
           status: '普通用户',
         },
         1: {
-          text: (
-            <FormattedMessage id="pages.users.role.admin" defaultMessage="管理员" />
-          ),
+          text: <FormattedMessage id="pages.users.role.admin" defaultMessage="管理员" />,
           status: '管理员',
         },
       },
@@ -144,13 +148,13 @@ const UserList: React.FC = () => {
           onClick={() => {
             setCurrentRow(record);
             handleDelConfirmModalVisible(true);
-          }}>
+          }}
+        >
           <FormattedMessage id="pages.common.delete" defaultMessage="删除" />
         </a>,
       ],
     },
   ];
-
 
   return (
     <PageContainer title={false}>
@@ -184,7 +188,7 @@ const UserList: React.FC = () => {
           </Button>,
         ]}
         request={async (params, sorter, filter) => {
-          const result = await queryUsers({ ...params, sorter, filter })
+          const result = await queryUsers({ ...params, sorter, filter });
           // console.log(result);
           const { code, content } = result;
           if (code === 200) {
@@ -193,17 +197,17 @@ const UserList: React.FC = () => {
               success: true,
               data,
               total,
-            }
+            };
           } else {
             return {
               success: false,
-            }
+            };
           }
         }}
         columns={columns}
       />
 
-      {delConfirmModalVisible &&
+      {delConfirmModalVisible && (
         <ModalForm
           title={intl.formatMessage({
             id: 'pages.common.delete',
@@ -224,8 +228,8 @@ const UserList: React.FC = () => {
         >
           <FormattedMessage id="pages.common.del-confirm" defaultMessage="确认删除?" />
         </ModalForm>
-      }
-      {formModalVisible &&
+      )}
+      {formModalVisible && (
         <ModalForm
           title={intl.formatMessage({
             id: 'pages.common.edit',
@@ -235,7 +239,7 @@ const UserList: React.FC = () => {
           visible={formModalVisible}
           onVisibleChange={handleFormModalVisible}
           onFinish={async (value) => {
-            value = { ...currentRow, ...value }
+            value = { ...currentRow, ...value };
             const success = await handleFormSubmit(value as User);
             if (success) {
               handleFormModalVisible(false);
@@ -248,9 +252,11 @@ const UserList: React.FC = () => {
           <ProFormText
             label={intl.formatMessage({
               id: 'pages.users.username',
+              defaultMessage: '帐号'
             })}
             initialValue={currentRow?.username}
             readonly={currentRow?.id !== undefined}
+            hidden={currentRow?.id !== undefined}
             rules={[
               {
                 required: true,
@@ -260,8 +266,10 @@ const UserList: React.FC = () => {
                     defaultMessage="帐户必须填写"
                   />
                 ),
-              }, {
-                min: 4, max: 64,
+              },
+              {
+                min: 4,
+                max: 64,
                 message: (
                   <FormattedMessage
                     id="pages.users.form.len.check"
@@ -274,7 +282,10 @@ const UserList: React.FC = () => {
             name="username"
           />
           <ProFormText.Password
-            label="密码"
+            label={intl.formatMessage({
+              id: 'pages.users.password',
+              defaultMessage: '密码'
+            })}
             rules={[
               {
                 required: currentRow?.id ? false : true,
@@ -284,8 +295,10 @@ const UserList: React.FC = () => {
                     defaultMessage="密码必须填写"
                   />
                 ),
-              }, {
-                min: 4, max: 64,
+              },
+              {
+                min: 4,
+                max: 64,
                 message: (
                   <FormattedMessage
                     id="pages.users.form.len.check"
@@ -301,34 +314,64 @@ const UserList: React.FC = () => {
             name="role"
             label={intl.formatMessage({ id: 'pages.users.role', defaultMessage: '角色' })}
             initialValue={currentRow?.role || 0}
+            fieldProps={{
+              onChange: ({ target: { value } }) => {
+                // console.log(value);
+                if (value === 0)
+                  setPerEditVisible(true);
+                else
+                  setPerEditVisible(false);
+              }
+            }}
             options={[
               {
-                label: intl.formatMessage({ id: 'pages.users.role.normal', defaultMessage: '普通用户' }),
+                label: intl.formatMessage({
+                  id: 'pages.users.role.normal',
+                  defaultMessage: '普通用户',
+                }),
                 value: 0,
               },
               {
-                label: intl.formatMessage({ id: 'pages.users.role.admin', defaultMessage: '管理员' }),
+                label: intl.formatMessage({
+                  id: 'pages.users.role.admin',
+                  defaultMessage: '管理员',
+                }),
                 value: 1,
               },
             ]}
           />
-          {/* <ProFormSelect
-          name="permission"
-          label={intl.formatMessage({ id: 'pages.user.permission', defaultMessage: '权限' })}
-          initialValue={currentRow?.permission}
-          request={async () => {
-            return [
-              { label: '全部', value: '1' },
-              { label: '未解决', value: '2' },
-              { label: '已解决', value: '3' },
-              { label: '解决中', value: '4' }
-            ]
-          }}
-        /> */}
+          <ProFormSelect
+            name="permission"
+            label={intl.formatMessage({
+              id: 'pages.users.permission',
+              defaultMessage: '权限'
+            })}
+            hidden={!perEditVisible}
+            initialValue={currentRow?.permission}
+            // initialValue={[1, 2]}
+            fieldProps={{
+              mode: 'multiple',
+              showSearch: true,
+            }}
+            request={async () => {
+
+              const { content } = await queryMyJobGroups();
+              const jobGroups: JobGroup[] = content;
+              const ret = [];
+              for (let index = 0; index < jobGroups.length; index++) {
+                const jobGroup = jobGroups[index];
+                ret.push({
+                  label: jobGroup.appname,
+                  value: jobGroup.id,
+                });
+              }
+              return ret;
+            }}
+          />
         </ModalForm>
-      }
+      )}
     </PageContainer>
-  )
+  );
 };
 
 export default UserList;
