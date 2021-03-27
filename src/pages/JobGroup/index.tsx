@@ -4,13 +4,12 @@ import { Button, message, FormInstance, Drawer } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import { ModalForm, ProFormText, ProFormRadio, ProFormTextArea, } from '@ant-design/pro-form';
+import { ModalForm, ProFormText, ProFormRadio, ProFormTextArea } from '@ant-design/pro-form';
 import ProTable from '@ant-design/pro-table';
 import type { QueryParam, JobGroup } from './data.d';
 import { queryJobGroups, saveJobGroup, deleteJobGroup } from './service';
 
 const JobGroupList: React.FC = () => {
-
   /** 国际化配置 */
   const intl = useIntl();
 
@@ -21,19 +20,23 @@ const JobGroupList: React.FC = () => {
   const handleDelete = async (jobGroup: JobGroup) => {
     if (jobGroup.id) {
       await deleteJobGroup(jobGroup.id);
-      message.success(intl.formatMessage({
-        id: 'pages.common.del-success',
-        defaultMessage: "删除成功"
-      }));
+      message.success(
+        intl.formatMessage({
+          id: 'pages.common.del-success',
+          defaultMessage: '删除成功',
+        }),
+      );
     } else {
-      message.error(intl.formatMessage({
-        id: 'pages.common.del-fail',
-        defaultMessage: "删除失败"
-      }));
+      message.error(
+        intl.formatMessage({
+          id: 'pages.common.del-fail',
+          defaultMessage: '删除失败',
+        }),
+      );
     }
 
     return true;
-  }
+  };
 
   /**
    * 新增或编辑执行
@@ -41,21 +44,24 @@ const JobGroupList: React.FC = () => {
    * @param fields
    */
   const handleFormSubmit = async (fields: JobGroup) => {
-
     /** 国际化配置 */
-    const hide = message.loading(intl.formatMessage({
-      id: 'pages.common.dealing',
-      defaultMessage: '处理中...'
-    }));
+    const hide = message.loading(
+      intl.formatMessage({
+        id: 'pages.common.dealing',
+        defaultMessage: '处理中...',
+      }),
+    );
 
     try {
       const { code, msg } = await saveJobGroup(fields);
       hide();
       if (code === 200) {
-        message.success(intl.formatMessage({
-          id: 'pages.common.save-success',
-          defaultMessage: "保存成功"
-        }));
+        message.success(
+          intl.formatMessage({
+            id: 'pages.common.save-success',
+            defaultMessage: '保存成功',
+          }),
+        );
         return true;
       } else {
         message.error(msg);
@@ -63,10 +69,12 @@ const JobGroupList: React.FC = () => {
       }
     } catch (error) {
       hide();
-      message.error(intl.formatMessage({
-        id: 'pages.common.save-fail',
-        defaultMessage: "保存失败,请重试"
-      }));
+      message.error(
+        intl.formatMessage({
+          id: 'pages.common.save-fail',
+          defaultMessage: '保存失败,请重试',
+        }),
+      );
       return false;
     }
   };
@@ -100,9 +108,7 @@ const JobGroupList: React.FC = () => {
       // },
     },
     {
-      title: (
-        <FormattedMessage id="pages.jobGroups.title" defaultMessage="名称" />
-      ),
+      title: <FormattedMessage id="pages.jobGroups.title" defaultMessage="名称" />,
       dataIndex: 'title',
     },
     {
@@ -133,7 +139,8 @@ const JobGroupList: React.FC = () => {
             setShowRegistryList(true);
           }}
         >
-          <FormattedMessage id="pages.common.show" defaultMessage="查看" />( {record.registryList && record.registryList.length || 0})
+          <FormattedMessage id="pages.common.show" defaultMessage="查看" />({' '}
+          {(record.registryList && record.registryList.length) || 0})
         </a>,
       ],
     },
@@ -157,13 +164,13 @@ const JobGroupList: React.FC = () => {
           onClick={() => {
             setCurrentRow(record);
             handleDelConfirmModalVisible(true);
-          }}>
+          }}
+        >
           <FormattedMessage id="pages.common.delete" defaultMessage="删除" />
         </a>,
       ],
     },
   ];
-
 
   return (
     <PageContainer title={false}>
@@ -191,7 +198,7 @@ const JobGroupList: React.FC = () => {
           </Button>,
         ]}
         request={async (params, sorter, filter) => {
-          const result = await queryJobGroups({ ...params, sorter, filter })
+          const result = await queryJobGroups({ ...params, sorter, filter });
           // console.log(result);
           const { code, content } = result;
           if (code === 200) {
@@ -200,17 +207,17 @@ const JobGroupList: React.FC = () => {
               success: true,
               data,
               total,
-            }
+            };
           } else {
             return {
               success: false,
-            }
+            };
           }
         }}
         columns={columns}
       />
 
-      {delConfirmModalVisible &&
+      {delConfirmModalVisible && (
         <ModalForm
           title={intl.formatMessage({
             id: 'pages.common.delete',
@@ -231,8 +238,8 @@ const JobGroupList: React.FC = () => {
         >
           <FormattedMessage id="pages.common.del-confirm" defaultMessage="确认删除?" />
         </ModalForm>
-      }
-      {formModalVisible &&
+      )}
+      {formModalVisible && (
         <ModalForm
           title={intl.formatMessage({
             id: 'pages.common.new',
@@ -242,7 +249,7 @@ const JobGroupList: React.FC = () => {
           visible={formModalVisible}
           onVisibleChange={handleFormModalVisible}
           onFinish={async (value) => {
-            value = { ...currentRow, ...value }
+            value = { ...currentRow, ...value };
             const success = await handleFormSubmit(value as JobGroup);
             if (success) {
               handleFormModalVisible(false);
@@ -266,7 +273,8 @@ const JobGroupList: React.FC = () => {
                 ),
               },
               {
-                min: 4, max: 64,
+                min: 4,
+                max: 64,
                 message: (
                   <FormattedMessage
                     id="pages.jobGroups.form.len.check"
@@ -281,7 +289,7 @@ const JobGroupList: React.FC = () => {
           <ProFormText
             label={intl.formatMessage({
               id: 'pages.jobGroups.title',
-              defaultMessage: '名称'
+              defaultMessage: '名称',
             })}
             initialValue={currentRow?.title}
             rules={[
@@ -295,21 +303,25 @@ const JobGroupList: React.FC = () => {
                 ),
               },
               {
-                min: 4, max: 64,
+                min: 4,
+                max: 64,
                 message: (
                   <FormattedMessage
                     id="pages.jobGroups.form.len.check"
                     defaultMessage="长度必须在[4-64]"
                   />
                 ),
-              }
+              },
             ]}
             width="md"
             name="title"
           />
           <ProFormRadio.Group
             name="addressType"
-            label={intl.formatMessage({ id: 'pages.jobGroups.address-type', defaultMessage: '注册方式' })}
+            label={intl.formatMessage({
+              id: 'pages.jobGroups.address-type',
+              defaultMessage: '注册方式',
+            })}
             initialValue={currentRow?.addressType || 0}
             fieldProps={{
               onChange: ({ target: { value } }) => {
@@ -318,15 +330,21 @@ const JobGroupList: React.FC = () => {
                 } else {
                   handleAddressListDisable(false);
                 }
-              }
+              },
             }}
             options={[
               {
-                label: intl.formatMessage({ id: 'pages.jobGroups.address-type.auto', defaultMessage: '自动注册' }),
+                label: intl.formatMessage({
+                  id: 'pages.jobGroups.address-type.auto',
+                  defaultMessage: '自动注册',
+                }),
                 value: 0,
               },
               {
-                label: intl.formatMessage({ id: 'pages.jobGroups.address-type.manual', defaultMessage: '手动注册' }),
+                label: intl.formatMessage({
+                  id: 'pages.jobGroups.address-type.manual',
+                  defaultMessage: '手动注册',
+                }),
                 value: 1,
               },
             ]}
@@ -334,11 +352,14 @@ const JobGroupList: React.FC = () => {
           <ProFormTextArea
             disabled={addressListDisable}
             name="addressList"
-            label={intl.formatMessage({ id: 'pages.jobGroups.address-list', defaultMessage: '注册方式' })}
+            label={intl.formatMessage({
+              id: 'pages.jobGroups.address-list',
+              defaultMessage: '注册方式',
+            })}
             initialValue={currentRow?.addressList || 0}
           />
         </ModalForm>
-      }
+      )}
       <Drawer
         width={460}
         visible={showRegistryList}
@@ -349,13 +370,20 @@ const JobGroupList: React.FC = () => {
         closable={false}
       >
         <>
-          <b><FormattedMessage id='pages.jobGroups.registry-list' /></b>
+          <b>
+            <FormattedMessage id="pages.jobGroups.registry-list" />
+          </b>
           <br />
-          {currentRow?.registryList && currentRow?.registryList.map((host) => <>{host} <br /></>)}
+          {currentRow?.registryList &&
+            currentRow?.registryList.map((host) => (
+              <>
+                {host} <br />
+              </>
+            ))}
         </>
       </Drawer>
     </PageContainer>
-  )
+  );
 };
 
 export default JobGroupList;

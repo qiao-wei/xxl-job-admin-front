@@ -12,7 +12,7 @@ export async function queryJobsByGroup(jobGroup?: number) {
 }
 
 export async function saveJob(job?: Job) {
-  console.log(job);
+  // console.log(job);
   if (job?.id && job.id > 0) {
     return request.put('/rest/jobs/' + job?.id, { data: job });
   } else {
@@ -25,11 +25,11 @@ export async function startJob(id: Number) {
 }
 
 export async function stopJob(id: Number) {
-  return request.post('/rest/jobs/' + id + "/stop");
+  return request.post('/rest/jobs/' + id + '/stop');
 }
 
 export async function triggerJob(id: Number, triggerInfo: any) {
-  return request.post('/rest/jobs/' + id + "/trigger", { data: triggerInfo });
+  return request.post('/rest/jobs/' + id + '/trigger', { data: triggerInfo });
 }
 
 export async function deleteJob(id: Number) {
@@ -37,5 +37,7 @@ export async function deleteJob(id: Number) {
 }
 
 export async function queryNextTriggerTimes(scheduleType: string, scheduleConf: string) {
-  return request.get('/rest/jobs/nextTriggerTimes?scheduleType=' + scheduleType + '&scheduleConf=' + scheduleConf);
+  return request.get(
+    '/rest/jobs/nextTriggerTimes?scheduleType=' + scheduleType + '&scheduleConf=' + scheduleConf,
+  );
 }

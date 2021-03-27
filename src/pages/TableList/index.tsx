@@ -23,7 +23,7 @@ const handleAdd = async (fields: TableListItem) => {
   try {
     await addRule({ ...fields });
     hide();
-    message.success('添加成功'); 
+    message.success('添加成功');
     return true;
   } catch (error) {
     hide();

@@ -6,8 +6,8 @@ export type CurrentUser = {
   id?: string;
   username?: string;
   avatar?: string;
-  role?: string,
-  permission?: string,
+  role?: string;
+  permission?: string;
   unreadCount?: number;
 };
 

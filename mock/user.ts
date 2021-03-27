@@ -27,14 +27,13 @@ export default {
       // notifyCount: 12,
       // unreadCount: 11,
       // country: 'China',
-    }
+    },
   },
   // GET POST 可省略
   'GET /rest/users': {
     code: 200,
     msg: '',
-    content:
-    {
+    content: {
       total: 100,
       current: 1,
       pageSize: 10,
@@ -53,8 +52,8 @@ export default {
           role: 0,
           permission: '',
         },
-      ]
-    }
+      ],
+    },
   },
   'POST /rest/login': async (req: Request, res: Response) => {
     const { password, username } = req.body;
@@ -64,12 +63,12 @@ export default {
         code: 200,
         msg: 'success',
         content: {
-          "id": 1,
-          "username": "admin",
-          "password": null,
-          "role": 1,
-          "permission": null
-        }
+          id: 1,
+          username: 'admin',
+          password: null,
+          role: 1,
+          permission: null,
+        },
       });
       return;
     }
@@ -77,8 +76,11 @@ export default {
     res.send({
       code: 500,
       msg: 'error',
-      content: null
+      content: null,
     });
+  },
+  'POST /rest/logout': (req: Request, res: Response) => {
+    res.send({ code: 200, msg: '', content: '' });
   },
   'POST /rest/users': (req: Request, res: Response) => {
     res.send({ code: 200, msg: '', content: '' });

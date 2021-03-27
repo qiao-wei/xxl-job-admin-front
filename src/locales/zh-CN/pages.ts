@@ -2,7 +2,7 @@ export default {
   'pages.admin.subPage.title': ' 这个页面只有 admin 权限才能查看',
 
   'pages.layouts.userLayout.title': '调度平台',
-  'pages.layouts.userLayout.sub-title': 'Xxl 任务调度平台',
+  'pages.layouts.userLayout.sub-title': 'Chery通用任务调度平台',
   'pages.login.accountLogin.tab': '账户密码登录',
   'pages.login.accountLogin.errorMessage': '错误的用户名和密码',
   'pages.login.username.placeholder': '用户名: admin or user',

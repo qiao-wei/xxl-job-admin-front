@@ -12,6 +12,21 @@ export default {
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
+    '/xxl-job-admin/jobcode/save': {
+      target: 'http://localhost:8080/',
+      changeOrigin: true,
+      pathRewrite: { '^': '' },
+    },
+    '/jobcode': {
+      target: 'http://localhost:8080/xxl-job-admin',
+      changeOrigin: true,
+      pathRewrite: { '^': '' },
+    },
+    '/xxl-job-admin/static': {
+      target: 'http://localhost:8080/',
+      changeOrigin: true,
+      pathRewrite: { '^': '' },
+    },
   },
   test: {
     '/api/': {

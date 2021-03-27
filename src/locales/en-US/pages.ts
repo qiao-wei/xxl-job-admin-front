@@ -1,7 +1,7 @@
 export default {
   'pages.admin.subPage.title': 'This page can only be viewed by Admin',
   'pages.layouts.userLayout.title': 'Task Schedule System',
-  'pages.layouts.userLayout.sub-title': 'Task Schedule System ',
+  'pages.layouts.userLayout.sub-title': 'Chery Task Schedule System ',
   'pages.login.accountLogin.tab': 'Account Login',
   'pages.login.accountLogin.errorMessage': 'Incorrect username/password',
   'pages.login.username.placeholder': 'Username: admin or user',

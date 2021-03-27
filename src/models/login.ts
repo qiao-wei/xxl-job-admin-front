@@ -75,7 +75,7 @@ const Model: LoginModelType = {
       }
     },
 
-    *logout({ }, { call }) {
+    *logout({}, { call }) {
       yield call(userLogout);
 
       const { redirect } = getPageQuery();

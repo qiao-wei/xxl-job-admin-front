@@ -1,11 +1,11 @@
 export type JobGroup = {
-  id: number,
+  id: number;
   appname: string;
-  title: string; 
+  title: string;
   addressType: number;
   addressList: string;
   updateTime: string;
-  registryList: string[]
+  registryList: string[];
 };
 
 export type QueryParam = {
